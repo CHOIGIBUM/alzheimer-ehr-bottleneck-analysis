@@ -1,0 +1,29 @@
+# Restricted or local source data
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.rds
+*.sav
+*.dta
+
+data/
+raw-data/
+private/
+private-source/
+
+# Editable source documents
+*.pptx
+*.hwp
+*.hwpx
+*.docx
+
+# Temporary and OS files
+~$*
+*.tmp
+.DS_Store
+Thumbs.db
