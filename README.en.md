@@ -301,3 +301,13 @@ This public repository presents the study design, aggregate results, presentatio
 **Solo Project · Research & Analysis · Grand Prize (Oral Presentation), 2026**
 
 </div>
+
+---
+
+## © Use of Materials
+
+No open-source or Creative Commons license is granted for this repository.
+
+Unless otherwise stated, the **README text and original overview diagrams or analysis figures authored by Gibum Choi** are made available for academic portfolio and review purposes. Please obtain prior permission before reusing, modifying, or redistributing these materials.
+
+The source data are not included and remain subject to the terms of the data provider. Event photographs, award documents, institutional logos, news coverage, and other third-party content are excluded and remain subject to the rights and terms of their respective owners or providers.
