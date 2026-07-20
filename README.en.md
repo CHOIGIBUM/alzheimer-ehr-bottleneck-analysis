@@ -1,12 +1,17 @@
 <div align="center">
 
-# Alzheimer’s EHR Bottleneck Analysis
+# EHR-Based Alzheimer’s Diagnostic Bottleneck Map
 
 <p>
   <a href="./README.md">한국어</a> · <strong>English</strong>
 </p>
 
-**A solo research project defining a record-based interval from the first pre-diagnostic EHR signal to the AD index date and examining starting clinical domains, observation intensity, and sensitivity to the lookback definition**
+<strong>
+A solo research project examining how record-based intervals and starting clinical domains differ,<br/>
+using the earliest pre-diagnosis comorbidity record as the first signal
+</strong>
+
+<br/><br/>
 
 ![Event](https://img.shields.io/badge/2026-Multi--Omics%20Hands--On-147C8A)
 ![Data](https://img.shields.io/badge/Data-Synthetic%20EHR-5A8F99)
@@ -19,11 +24,11 @@
 <img
   src="./assets/overview/alzheimer-ehr-bottleneck-analysis.png"
   width="100%"
-  alt="Overview of the Alzheimer’s EHR bottleneck analysis project"
+  alt="Overview of the Alzheimer’s EHR bottleneck analysis"
 />
 
 <sub>
-This graphic summarizes the study design and analysis workflow. The original aggregate results are shown below using figures from the presentation.
+This graphic summarizes the project timeline and analytical flow. Figures derived from the original presentation are shown below.
 </sub>
 
 <br/><br/>
@@ -38,42 +43,29 @@ This graphic summarizes the study design and analysis workflow. The original agg
   <img src="https://img.shields.io/badge/Abstract-View-5A8F99?style=for-the-badge" alt="View abstract" />
 </a>
 <a href="./materials/2026-multi-omics-award.pdf">
-  <img src="https://img.shields.io/badge/Award-View-C5962A?style=for-the-badge" alt="View award certificate" />
+  <img src="https://img.shields.io/badge/Award-View-C5962A?style=for-the-badge" alt="View award" />
 </a>
 <a href="https://www.gwlrs.ac.kr/ko/news/press/view/360?p=1">
-  <img src="https://img.shields.io/badge/Event%20Coverage-View-5E6E73?style=for-the-badge" alt="View event coverage" />
+  <img src="https://img.shields.io/badge/Event%20News-View-5E6E73?style=for-the-badge" alt="View event news" />
 </a>
 
 </div>
 
 ---
 
-## 🧭 Study Overview
+## 🧭 Research Background
 
-Before an Alzheimer’s disease diagnosis, EHRs may accumulate records of hypertension, diabetes, kidney disease, and other comorbidities. However, it is difficult to summarize where the pre-diagnostic pathway begins and how long it remains in the record before the diagnosis date.
+Before an Alzheimer’s disease diagnosis, records of hypertension, diabetes, kidney disease, and other comorbidities may accumulate over time. However, it is difficult to see at a glance where those records began and how they preceded the eventual diagnosis.
 
-Within a 10-year pre-index lookback window, the earliest record among 24 candidate conditions was defined as the **first signal**. The interval from the first signal to the Alzheimer’s disease index date was calculated as a **record-based interval**, and the condition selected as the first signal was mapped to one of six clinical domains.
+This project defined the earliest recorded pre-diagnosis comorbidity as the **first signal** and calculated the **record-based interval** from that signal to the Alzheimer’s disease diagnosis date. The condition corresponding to the first signal was grouped into a clinical domain, allowing the starting pathways of patients with shorter and longer intervals to be compared.
 
-The analysis did not aim to estimate the biological onset of disease. Instead, it examined where the pre-diagnostic EHR pathway began and how the record-based interval differed across patient groups.
-
-<p align="center">
-  <img
-    src="./assets/study/problem-definition.png"
-    width="100%"
-    alt="Problem definition for the Alzheimer’s EHR bottleneck analysis"
-  />
-</p>
+Rather than predicting individual disease risk, the analysis focused on where pre-diagnosis EHR records began and under what conditions the interval appeared longer.
 
 ---
 
 ## ❓ Research Questions
 
-The analysis was organized around the distribution of the interval, starting pathways, validity checks, and sensitivity to the lookback definition.
-
-1. What is the magnitude and distribution of the record-based interval from the first signal to the AD index date?
-2. How do starting clinical domains differ across short-, middle-, and long-interval groups?
-3. Do the domain patterns remain after observation intensity and age are considered together?
-4. How do the capture rate and interval change under 5-, 10-, and 15-year lookback definitions?
+The analysis was organized to examine the interval distribution, starting pathways, the influence of observation intensity, and changes caused by the lookback definition.
 
 <p align="center">
   <img
@@ -85,11 +77,9 @@ The analysis was organized around the distribution of the interval, starting pat
 
 ---
 
-## ⏱️ Study Design
+## ⏱️ Analysis Design
 
-The Alzheimer’s disease diagnosis date was defined as the **index date**, and the 10 years before the index were used as the primary lookback window. The earliest date among 24 candidate conditions within the lookback was selected as the first signal, and `index date - first signal date` was calculated as the record-based interval.
-
-Events recorded on or after the index date were excluded from first-signal selection so that post-diagnostic information would not be treated as a pre-diagnostic signal.
+**The time axis was fixed first.** The Alzheimer’s disease diagnosis date was set as the **Index**, and the preceding 10 years were used as the primary lookback window. Among 24 candidate conditions, the earliest date before the Index was selected as the first signal. Events recorded on the Index date or afterward were excluded.
 
 <p align="center">
   <img
@@ -99,28 +89,7 @@ Events recorded on or after the index date were excluded from first-signal selec
   />
 </p>
 
-<p align="center">
-  <img
-    src="./assets/study/leakage-control.png"
-    width="100%"
-    alt="Temporal leakage-control rules for the Alzheimer’s EHR analysis"
-  />
-</p>
-
----
-
-## 🗂️ Data and Cohort
-
-The project used **MIMICData Dementia/Alzheimer’s synthetic EHR** provided through the COMPASS platform. Among 3,000 records, 1,287 patients had Alzheimer’s disease marked as Yes and a valid diagnosis date. A first signal was captured within the 10-year lookback for 893 patients, corresponding to a capture rate of 69.4%.
-
-The 24 candidate conditions were mapped to six clinical domains to maintain a consistent unit of interpretation.
-
-- **Cardiovascular:** hypertension, ischemic heart disease, and related conditions
-- **Metabolic:** type 2 diabetes, dyslipidemia, and related conditions
-- **Renal:** chronic kidney disease, end-stage renal disease, and related conditions
-- **Bone/Frailty:** osteoporosis, fractures, and related conditions
-- **Mental:** anxiety, panic, depression, and related conditions
-- **Hematology:** anemia and related conditions
+**The cohort was then narrowed according to that time axis.** Of 3,000 individuals in the synthetic cohort, 1,287 had Alzheimer’s disease and a recorded diagnosis date. A first signal within the 10-year lookback was captured for 893 of them.
 
 <p align="center">
   <img
@@ -130,19 +99,9 @@ The 24 candidate conditions were mapped to six clinical domains to maintain a co
   />
 </p>
 
----
+**Individual conditions were grouped into six clinical domains.** Cardiovascular, metabolic, renal, bone/frailty, mental, and hematology domains were used as a consistent level of interpretation for comparing starting pathways across interval groups.
 
-## 🧪 Methods
-
-The analysis followed five steps: cohort definition, first-signal extraction, interval calculation, clinical-domain mapping, and validity checks.
-
-The 10-year interval distribution was divided using quartile cutoffs.
-
-- **Short:** 1,258 days or less
-- **Middle:** more than 1,258 and less than 2,968 days
-- **Long:** 2,968 days or more
-
-The number of candidate events recorded within the lookback was defined as **observation intensity (event count)**. A logistic regression model used Long-group status as the outcome and included starting domain, event count, and age. Sensitivity analyses were also conducted using 5-, 10-, and 15-year lookback windows.
+**The observed differences were then re-examined.** Patients with more recorded candidate conditions had more opportunities for an earlier date to become the first signal. Starting domain, candidate-event count, and age were therefore considered together. The lookback window was also changed to 5, 10, and 15 years to assess how strongly the findings depended on the analytical definition.
 
 <p align="center">
   <img
@@ -154,69 +113,61 @@ The number of candidate events recorded within the lookback was defined as **obs
 
 ---
 
-## 📊 Results
+## 📊 Key Findings
 
-### Record-Based Interval Distribution
+### Record-Based Interval
 
-Among the 893 patients with a captured first signal in the 10-year lookback, the median record-based interval was **2,198 days (approximately 6.0 years)**. The IQR was **1,258-2,968 days**, and intervals of 2,968 days or more were classified as Long.
+A first signal within the 10-year lookback was captured for 893 patients. The median interval from first signal to Alzheimer’s disease diagnosis was **2,198 days (approximately 6.0 years)**. The 25th and 75th percentiles were 1,258 and 2,968 days, respectively.
+
+These cut points were used to define the **Short**, **Middle**, and **Long** interval groups.
 
 <p align="center">
   <img
     src="./assets/results/delay-distribution.png"
     width="100%"
-    alt="Distribution of the record-based interval before the AD index date"
+    alt="Distribution of the pre-diagnosis record-based interval"
   />
 </p>
 
-### Starting-Domain Patterns
+### Starting Domains
 
-Relative differences were observed in the composition of starting domains across interval groups.
+The Short group had relatively higher proportions of bone/frailty and mental first signals, whereas the Long group showed higher proportions of renal and metabolic first signals. Cardiovascular conditions remained a major starting domain across all three groups.
 
-- **Short group:** Bone/Frailty and Mental domains were relatively more common.
-- **Long group:** Renal and Metabolic domains increased in relative proportion.
-- **Cardiovascular:** remained a major starting domain across all interval groups.
+This pattern suggests that the clinical domain in which pre-diagnosis records begin may differ across patient groups.
 
 <p align="center">
   <img
     src="./assets/results/starting-domain-map.png"
     width="100%"
-    alt="Starting-domain bottleneck map by interval group"
+    alt="Starting-domain map by interval group"
   />
 </p>
 
-### Observation Intensity
+### Validity of the Indicator
 
-The mean number of candidate events was **1.53** in the Short group and **3.12** in the Long group. Because the first signal was defined as the earliest eligible date, patients with more recorded candidate events had more opportunities for an earlier date to be selected. Observation intensity was therefore examined alongside the interval results.
+Starting-domain differences alone were not sufficient to describe differences in the diagnostic pathway. Because the first signal was defined as the earliest record, patients with more candidate records had a greater chance of having an earlier date selected.
+
+The mean candidate-event count was **3.12** in the Long group and **1.53** in the Short group.
 
 <p align="center">
   <img
     src="./assets/results/observation-intensity.png"
     width="100%"
-    alt="Comparison of pre-index candidate event counts by interval group"
+    alt="Comparison of candidate-event counts across interval groups"
   />
 </p>
 
-### Adjusted Analysis
-
-A logistic regression model was fitted with Long-group status as the outcome and starting domain, event count, and age as predictors. Higher event count was associated with an increased likelihood of being observed in the Long group, while some domain differences remained after adjustment.
+When event count and age were considered together, event count remained strongly associated with membership in the Long group. Some domain differences remained after adjustment, but domain patterns and observation intensity still needed to be interpreted separately.
 
 <p align="center">
   <img
     src="./assets/results/adjusted-associations.png"
     width="100%"
-    alt="Adjusted logistic regression associations with Long-group status"
+    alt="Adjusted logistic-regression associations with the Long group"
   />
 </p>
 
-### Sensitivity Analysis
-
-Longer lookback windows increased the first-signal capture rate and also extended the range from which an earlier record could be selected, resulting in a higher median record-based interval.
-
-| Lookback | First-signal capture rate | Median record-based interval |
-|:---:|---:|---:|
-| 5 years | 49.0% | 1,113 days |
-| 10 years | 69.4% | 2,198 days |
-| 15 years | 82.1% | 3,412 days |
+Extending the lookback window from 5 to 15 years increased the first-signal capture rate from **49.0% to 82.1%** and increased the median interval from **1,113 to 3,412 days**. The absolute interval therefore depended substantially on the observation-window definition.
 
 <table>
   <tr>
@@ -224,10 +175,10 @@ Longer lookback windows increased the first-signal capture rate and also extende
       <img
         src="./assets/results/sensitivity-capture-rate.png"
         width="100%"
-        alt="Sensitivity of first-signal capture rate to the lookback definition"
+        alt="Sensitivity of the first-signal capture rate to the lookback definition"
       />
       <br/>
-      <sub>First-Signal Capture Rate</sub>
+      <sub>First-signal capture rate</sub>
     </td>
     <td width="50%" align="center">
       <img
@@ -236,7 +187,7 @@ Longer lookback windows increased the first-signal capture rate and also extende
         alt="Sensitivity of the median record-based interval to the lookback definition"
       />
       <br/>
-      <sub>Median Record-Based Interval</sub>
+      <sub>Median record-based interval</sub>
     </td>
   </tr>
 </table>
@@ -245,62 +196,45 @@ Longer lookback windows increased the first-signal capture rate and also extende
 
 ## 🔍 Interpretation
 
-The Short and Long groups differed in the relative composition of their starting clinical domains. However, because the first signal was defined as the earliest recorded event, patients with more candidate-condition records had a greater opportunity for an earlier date to be selected.
+The starting domain of the first signal differed across interval groups, but these differences were not interpreted as direct evidence of diagnostic delay after disease onset. Observation intensity and the length of the lookback window changed both the selected first signal and the resulting interval.
 
-The Long group had higher pre-index event counts, and both the capture rate and median interval changed when the lookback window was modified. The interval was therefore interpreted as an **EHR-based, definition-dependent measure**, rather than a direct estimate of the time from biological onset to clinical diagnosis.
+The interval in this project therefore represents the time between the earliest qualifying record within a defined observation window and the Alzheimer’s disease diagnosis date. It is an **EHR-based interval**, not an estimate of disease onset.
 
-A central contribution of the project was to evaluate not only the statistical patterns, but also how cohort construction, time-axis definition, observation intensity, and sensitivity to the analytic window shaped those patterns.
+The central contribution of the analysis was not only to identify a domain pattern, but also to examine how that pattern was shaped by the time axis, record count, and indicator definition.
 
 ---
 
-## 🎤 Presentation and Award
+## 🎤 Presentation and Materials
+
+This was a solo project covering the research question, time-axis definition, cohort construction, statistical analysis, interpretation, and oral presentation. It received the **Grand Prize in the Oral Presentation category** at the 2026 Synthetic Data-Based Multi-Omics Hands-On Workshop.
 
 <table>
   <tr>
     <td width="50%" align="center">
       <img src="./assets/event/presentation-photo.jpg" width="100%" alt="Oral presentation at the Multi-Omics Hands-On Workshop" />
       <br/>
-      <sub>Oral Presentation</sub>
+      <sub>Oral presentation</sub>
     </td>
     <td width="50%" align="center">
       <img src="./assets/event/award-photo.jpg" width="100%" alt="Grand Prize in the oral presentation category" />
       <br/>
-      <sub>Grand Prize, Oral Presentation Category</sub>
+      <sub>Grand Prize in the Oral Presentation category</sub>
     </td>
   </tr>
 </table>
 
----
-
-## 📎 Project Materials
+### Project Materials
 
 | Material | Link | Description |
 |:---|:---|:---|
-| Presentation | [2026 Multi-Omics Hands-On Presentation](./materials/2026-multi-omics-presentation.pdf) | Research questions, time axis, cohort, methods, and results |
-| Poster | [2026 Multi-Omics Hands-On Poster](./materials/2026-multi-omics-poster.pdf) | Summary of study design and findings |
-| Abstract | [Oral Presentation Abstract](./materials/2026-multi-omics-abstract.pdf) | Background, methods, results, and conclusion |
-| Award | [Grand Prize Certificate](./materials/2026-multi-omics-award.pdf) | Awarded on January 23, 2026 |
-| Official coverage | [Gangwon LRS Shared University](https://www.gwlrs.ac.kr/ko/news/press/view/360?p=1) | Event and project showcase coverage |
-| Additional coverage | [Lecturer News](https://www.lecturernews.com/news/articleView.html?idxno=195955) · [Enews Today](https://www.enewstoday.co.kr/news/articleView.html?idxno=2385680) · [Kyosu Newspaper](https://www.kyosu.net/news/articleView.html?idxno=156225) | Coverage of the workshop and student research presentations |
+| Presentation | [2026 Multi-Omics Hands-On presentation](./materials/2026-multi-omics-presentation.pdf) | Research questions, time axis, cohort, analysis, and major findings |
+| Poster | [2026 Multi-Omics Hands-On poster](./materials/2026-multi-omics-poster.pdf) | Summary of the design and findings |
+| Abstract | [Presentation abstract](./materials/2026-multi-omics-abstract.pdf) | Background, methods, results, and conclusion |
+| Award | [Grand Prize in the Oral Presentation category](./materials/2026-multi-omics-award.pdf) | Awarded on January 23, 2026 |
+| Official news | [Gangwon LRS Shared University](https://www.gwlrs.ac.kr/ko/news/press/view/360?p=1) | Event and achievement-sharing news |
+| Media coverage | [Lecturer News](https://www.lecturernews.com/news/articleView.html?idxno=195955) · [Enews Today](https://www.enewstoday.co.kr/news/articleView.html?idxno=2385680) · [The Kyosu Shinmun](https://www.kyosu.net/news/articleView.html?idxno=156225) | Coverage of the workshop and research presentations |
 
-This public repository presents the study design, aggregate results, presentation materials, and event records. The source dataset is not redistributed.
-
----
-
-## 👤 Project and Recognition
-
-| Category | Details |
-|:---|:---|
-| Project format | Solo project |
-| Role | Research question formulation, time-axis and first-signal definition, cohort construction, clinical-domain mapping, statistical analysis, interpretation, and oral presentation |
-| Event | Synthetic Data-Based Multi-Omics Hands-On Workshop |
-| Recognition | Grand Prize, Oral Presentation Category |
-
-<div align="center">
-
-**Solo Project · Research & Analysis · Grand Prize (Oral Presentation), 2026**
-
-</div>
+The repository is organized around the study design, aggregate findings, presentation materials, and event records.
 
 ---
 
@@ -310,4 +244,4 @@ No open-source or Creative Commons license is granted for this repository.
 
 Unless otherwise stated, the **README text and original overview diagrams or analysis figures authored by Gibum Choi** are made available for academic portfolio and review purposes. Please obtain prior permission before reusing, modifying, or redistributing these materials.
 
-The source data are not included and remain subject to the terms of the data provider. Event photographs, award documents, institutional logos, news coverage, and other third-party content are excluded and remain subject to the rights and terms of their respective owners or providers.
+The source data are not included and remain subject to the terms of the data provider. Jointly authored materials, event photographs, award documents, institutional logos, news coverage, and other third-party content are excluded and remain subject to the rights and terms of their respective owners or providers.
